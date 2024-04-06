@@ -1,0 +1,17 @@
+{
+    "homepage": "https://github.com/judeharis/secda_tools",
+    "maintainers": [
+        {
+            "email": "judeharis@ymail.com",
+            "github": "judeharis",
+            "name": "Jude Haris"
+        }
+    ],
+    "repository": [
+        "github:judeharis/secda_tools"
+    ],
+    "versions": [
+        "0.1.0"
+    ],
+    "yanked_versions": {}
+}
