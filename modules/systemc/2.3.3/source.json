@@ -1,0 +1,9 @@
+{
+  "integrity": "sha256-V4G5o1Hlr+2rw30UXl9+3sCPP9XeAP/rj6HzCGsfez8=",
+  "patch_strip": 0,
+  "patches": {
+    "add_build_file.patch": "sha256-Iu0tx78CXD4lFmUEe0Qhw1bTbGOlzLr97Vz/iWxwWUE="
+  },
+  "strip_prefix": "",
+  "url": "https://www.accellera.org/images/downloads/standards/systemc/systemc-2.3.3.tar.gz"
+}

@@ -1,0 +1,17 @@
+{
+    "homepage": "https://github.com/accellera-official/systemc",
+    "maintainers": [
+        {
+            "email": "judeharis@ymail.com",
+            "github": "judeharis",
+            "name": "Jude Haris"
+        }
+    ],
+    "repository": [
+        "github:accellera-official/systemc"
+    ],
+    "versions": [
+        "2.3.3"
+    ],
+    "yanked_versions": {}
+}
