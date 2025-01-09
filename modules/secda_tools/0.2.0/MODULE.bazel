@@ -35,5 +35,7 @@ module(
 bazel_dep(name = "rules_cc", version = "0.0.1")
 bazel_dep(name = "rules_foreign_cc", version = "0.10.1")
 bazel_dep(name = "systemc", version = "2.3.3")
+bazel_dep(name = "bazel_skylib", version = "1.4.1")
+
 
 
