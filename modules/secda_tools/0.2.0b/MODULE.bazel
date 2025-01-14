@@ -28,7 +28,7 @@
 
 module(
     name = "secda_tools",
-    version = "0.2.0",
+    version = "0.2.0b",
     compatibility_level = 1,
     repo_name = "secda_tools",
 )
