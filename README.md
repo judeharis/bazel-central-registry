@@ -33,5 +33,8 @@ openssl dgst -sha256 -binary secda_tools-0.1.0.tar.gz | openssl base64 -A
 openssl dgst -sha256 -binary secda_tools-0.2.0.tar.gz | openssl base64 -A
 openssl dgst -sha256 -binary secda_tools-0.2.0b.tar.gz | openssl base64 -A
 
+
+openssl dgst -sha256 -binary add_build_file.patch | openssl base64 -A
+
 ```
 
