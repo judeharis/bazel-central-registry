@@ -1,5 +1,5 @@
 {
-  "integrity": "sha256-sUf9OfYsIv8xlSE5mRq7VpkosskqvnoNOdZf831bW7E=",
+  "integrity": "sha256-qFh7mQKkpuEu1mdVp53tT+dHN7RmrDKypc3vN5e9bmY=",
   "patch_strip": 0,
   "strip_prefix": "secda_tools-0.2.1/",
   "url": "https://github.com/judeharis/secda_tools/archive/refs/tags/0.2.1.tar.gz"
