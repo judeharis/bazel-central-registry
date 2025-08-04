@@ -1,6 +1,6 @@
 --- /dev/null
 +++ BUILD.bazel
-@@ -0,0 +1,62 @@
+@@ -0,0 +1,61 @@
 +# Copyright Glasgow University
 +# All Rights Reserved.
 +#
