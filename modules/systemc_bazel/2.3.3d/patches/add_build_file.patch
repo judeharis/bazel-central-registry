@@ -43,9 +43,9 @@
 +    outs = ["systemc-2.3.3/install/lib/libsystemc.a"],
 +    cmd =
 +        "export CXX='clang++ -fPIC' && export CC=clang && " +
-+        "cmake -DCMAKE_INSTALL_PREFIX=external/systemc/systemc-2.3.3/install -DCMAKE_CXX_STANDARD=17 -DCMAKE_INSTALL_INCLUDEDIR=include/systemc -DBUILD_SHARED_LIBS=off -Bexternal/systemc/systemc-2.3.3/build -Hexternal/systemc/systemc-2.3.3 &&" +
-+        "make -C external/systemc/systemc-2.3.3/build install -j4 CXXFLAGS='-fPIC' &&" +
-+        "cp external/systemc/systemc-2.3.3/install/lib/libsystemc.a $@",
++        "cmake -DCMAKE_INSTALL_PREFIX=external/systemc_bazel~2.3.3d/systemc-2.3.3/install -DCMAKE_CXX_STANDARD=17 -DCMAKE_INSTALL_INCLUDEDIR=include/systemc -DBUILD_SHARED_LIBS=off -Bexternal/systemc_bazel~2.3.3d/systemc-2.3.3/build -Hexternal/systemc_bazel~2.3.3d/systemc-2.3.3 &&" +
++        "make -C external/systemc_bazel~2.3.3d/systemc-2.3.3/build install -j4 CXXFLAGS='-fPIC' &&" +
++        "cp external/systemc_bazel~2.3.3d/systemc-2.3.3/install/lib/libsystemc.a $@",
 +)
 +
 +
