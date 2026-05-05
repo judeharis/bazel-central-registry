@@ -35,9 +35,14 @@ openssl dgst -sha256 -binary secda_tools-0.2.0b.tar.gz | openssl base64 -A
 openssl dgst -sha256 -binary secda_tools-0.2.0d.tar.gz | openssl base64 -A
 openssl dgst -sha256 -binary secda_tools-0.2.1.tar.gz | openssl base64 -A
 openssl dgst -sha256 -binary secda_tools-0.2.1a.tar.gz | openssl base64 -A
+openssl dgst -sha256 -binary secda_tools-0.2.2.tar.gz | openssl base64 -A
+
 
 
 openssl dgst -sha256 -binary add_build_file.patch | openssl base64 -A
 
 ```
 
+
+wget https://github.com/judeharis/secda_tools/archive/refs/tags/0.2.2.tar.gz
+mv 0.2.2.tar.gz secda_tools-0.2.2.tar.gz
