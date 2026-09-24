@@ -14,7 +14,8 @@ decides how SystemC is compiled. The exposed target is always
 | 2.3.3b  | `rules_foreign_cc` `cmake()` | `g++` / `gcc` | 17 | Superseded |
 | 2.3.3c  | `rules_foreign_cc` `cmake()` | `clang++` / `clang` via wrapper scripts | 17 | Working |
 | 2.3.3d  | Plain `genrule` running cmake + make | `clang++` / `clang` | 17 | Working |
-| 2.3.3e  | Native `cc_library` (no cmake) | Project's Bazel toolchain | 17 | Working, recommended |
+| 2.3.3e  | Native `cc_library` (no cmake) | Project's Bazel toolchain | 17 | Working |
+| 2.3.3f  | 2.3.3e + optional pthread coroutines | Project's Bazel toolchain | 17 | Working, recommended |
 
 ## Differences in detail
 
@@ -81,9 +82,21 @@ Notes:
 - Coroutine assembly is only selected for x86_64 and aarch64; other CPUs would
   need another `select()` branch (see `QT_ARCH` in SystemC's `src/CMakeLists.txt`).
 
+### 2.3.3f
+Identical to 2.3.3e (native `cc_library`, same sources and defines) plus an
+opt-in debugging mode. The default QuickThreads backend runs each `SC_THREAD`
+on its own stack, so a debugger's call stack for a thread ends at `qt_blocki`.
+Build with `--define=systemc_pthreads=1` (use `-c dbg`) to use one POSIX thread
+per `SC_THREAD` instead: this defines `SC_USE_PTHREADS` (also exported to
+consumers) and drops the QuickThreads sources. The stack then unwinds cleanly
+to `start_thread` and every SystemC process appears as its own thread in
+gdb/VSCode. It is slower, and the scheduler (`sc_start` -> kernel) stays on the
+main thread, so it shows up as a separate thread, not as a continuation of the
+process's stack. Without the define the build is the same as 2.3.3e.
+
 ## Which one to use
 
-Use 2.3.3e. Use 2.3.3c or 2.3.3d only if you need the cmake-built layout
+Use 2.3.3f (2.3.3e if you never need the pthread debug mode). Use 2.3.3c or 2.3.3d only if you need the cmake-built layout
 (headers under `install/include/systemc`). 2.3.3 and 2.3.3b are the older
 GCC-based cmake builds.
 
