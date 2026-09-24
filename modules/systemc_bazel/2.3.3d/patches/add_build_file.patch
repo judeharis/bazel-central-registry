@@ -54,7 +54,7 @@
 +    name = "systemc_lib",
 +    srcs = ["systemc-2.3.3/install/lib/libsystemc.a"],
 +    hdrs = glob([
-+        "systemc-2.3.3/install/include/system.h",
++        "systemc-2.3.3/install/include/systemc.h",
 +    ]),
 +    copts = ["std=c++17"],
 +    data = [":libsystemc"],
