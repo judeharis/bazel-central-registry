@@ -1,0 +1,153 @@
+--- /dev/null
++++ BUILD.bazel
+@@ -0,0 +1,150 @@
++# Copyright Glasgow University
++# All Rights Reserved.
++#
++#
++# Redistribution and use in source and binary forms, with or without
++# modification, are permitted provided that the following conditions are
++# met:
++#
++#     * Redistributions of source code must retain the above copyright
++# notice, this list of conditions and the following disclaimer.
++#     * Redistributions in binary form must reproduce the above
++# copyright notice, this list of conditions and the following disclaimer
++# in the documentation and/or other materials provided with the
++# distribution.
++#     * Neither the name of Google Inc. nor the names of its
++# contributors may be used to endorse or promote products derived from
++# this software without specific prior written permission.
++#
++# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
++# "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
++# LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
++# A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
++# OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
++# SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
++# LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
++# DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
++# THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
++# (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
++# OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
++#
++# Author: Jude Haris
++
++licenses(["notice"])
++
++package(default_visibility = ["//visibility:public"])
++
++# SystemC built directly by Bazel (no cmake). Mirrors src/CMakeLists.txt with
++# default options: QuickThreads coroutines, SC_BUILD/SC_INCLUDE_FX private defines.
++cc_library(
++    name = "systemc_lib",
++    srcs = [
++        "systemc-2.3.3/src/sysc/communication/sc_clock.cpp",
++        "systemc-2.3.3/src/sysc/communication/sc_event_finder.cpp",
++        "systemc-2.3.3/src/sysc/communication/sc_event_queue.cpp",
++        "systemc-2.3.3/src/sysc/communication/sc_export.cpp",
++        "systemc-2.3.3/src/sysc/communication/sc_interface.cpp",
++        "systemc-2.3.3/src/sysc/communication/sc_mutex.cpp",
++        "systemc-2.3.3/src/sysc/communication/sc_port.cpp",
++        "systemc-2.3.3/src/sysc/communication/sc_prim_channel.cpp",
++        "systemc-2.3.3/src/sysc/communication/sc_semaphore.cpp",
++        "systemc-2.3.3/src/sysc/communication/sc_signal.cpp",
++        "systemc-2.3.3/src/sysc/communication/sc_signal_ports.cpp",
++        "systemc-2.3.3/src/sysc/communication/sc_signal_resolved.cpp",
++        "systemc-2.3.3/src/sysc/communication/sc_signal_resolved_ports.cpp",
++        "systemc-2.3.3/src/sysc/datatypes/bit/sc_bit.cpp",
++        "systemc-2.3.3/src/sysc/datatypes/bit/sc_bv_base.cpp",
++        "systemc-2.3.3/src/sysc/datatypes/bit/sc_logic.cpp",
++        "systemc-2.3.3/src/sysc/datatypes/bit/sc_lv_base.cpp",
++        "systemc-2.3.3/src/sysc/datatypes/fx/sc_fxcast_switch.cpp",
++        "systemc-2.3.3/src/sysc/datatypes/fx/sc_fxdefs.cpp",
++        "systemc-2.3.3/src/sysc/datatypes/fx/sc_fxnum.cpp",
++        "systemc-2.3.3/src/sysc/datatypes/fx/sc_fxnum_observer.cpp",
++        "systemc-2.3.3/src/sysc/datatypes/fx/sc_fxtype_params.cpp",
++        "systemc-2.3.3/src/sysc/datatypes/fx/sc_fxval.cpp",
++        "systemc-2.3.3/src/sysc/datatypes/fx/sc_fxval_observer.cpp",
++        "systemc-2.3.3/src/sysc/datatypes/fx/scfx_mant.cpp",
++        "systemc-2.3.3/src/sysc/datatypes/fx/scfx_pow10.cpp",
++        "systemc-2.3.3/src/sysc/datatypes/fx/scfx_rep.cpp",
++        "systemc-2.3.3/src/sysc/datatypes/fx/scfx_utils.cpp",
++        "systemc-2.3.3/src/sysc/datatypes/int/sc_int_base.cpp",
++        "systemc-2.3.3/src/sysc/datatypes/int/sc_int_mask.cpp",
++        "systemc-2.3.3/src/sysc/datatypes/int/sc_length_param.cpp",
++        "systemc-2.3.3/src/sysc/datatypes/int/sc_nbexterns.cpp",
++        "systemc-2.3.3/src/sysc/datatypes/int/sc_nbutils.cpp",
++        "systemc-2.3.3/src/sysc/datatypes/int/sc_signed.cpp",
++        "systemc-2.3.3/src/sysc/datatypes/int/sc_uint_base.cpp",
++        "systemc-2.3.3/src/sysc/datatypes/int/sc_unsigned.cpp",
++        "systemc-2.3.3/src/sysc/datatypes/misc/sc_concatref.cpp",
++        "systemc-2.3.3/src/sysc/datatypes/misc/sc_value_base.cpp",
++        "systemc-2.3.3/src/sysc/kernel/sc_attribute.cpp",
++        "systemc-2.3.3/src/sysc/kernel/sc_cor_fiber.cpp",
++        "systemc-2.3.3/src/sysc/kernel/sc_cor_pthread.cpp",
++        "systemc-2.3.3/src/sysc/kernel/sc_cor_qt.cpp",
++        "systemc-2.3.3/src/sysc/kernel/sc_cthread_process.cpp",
++        "systemc-2.3.3/src/sysc/kernel/sc_event.cpp",
++        "systemc-2.3.3/src/sysc/kernel/sc_except.cpp",
++        "systemc-2.3.3/src/sysc/kernel/sc_join.cpp",
++        "systemc-2.3.3/src/sysc/kernel/sc_main.cpp",
++        "systemc-2.3.3/src/sysc/kernel/sc_main_main.cpp",
++        "systemc-2.3.3/src/sysc/kernel/sc_method_process.cpp",
++        "systemc-2.3.3/src/sysc/kernel/sc_module.cpp",
++        "systemc-2.3.3/src/sysc/kernel/sc_module_name.cpp",
++        "systemc-2.3.3/src/sysc/kernel/sc_module_registry.cpp",
++        "systemc-2.3.3/src/sysc/kernel/sc_name_gen.cpp",
++        "systemc-2.3.3/src/sysc/kernel/sc_object.cpp",
++        "systemc-2.3.3/src/sysc/kernel/sc_object_manager.cpp",
++        "systemc-2.3.3/src/sysc/kernel/sc_phase_callback_registry.cpp",
++        "systemc-2.3.3/src/sysc/kernel/sc_process.cpp",
++        "systemc-2.3.3/src/sysc/kernel/sc_reset.cpp",
++        "systemc-2.3.3/src/sysc/kernel/sc_sensitive.cpp",
++        "systemc-2.3.3/src/sysc/kernel/sc_simcontext.cpp",
++        "systemc-2.3.3/src/sysc/kernel/sc_spawn_options.cpp",
++        "systemc-2.3.3/src/sysc/kernel/sc_thread_process.cpp",
++        "systemc-2.3.3/src/sysc/kernel/sc_time.cpp",
++        "systemc-2.3.3/src/sysc/kernel/sc_ver.cpp",
++        "systemc-2.3.3/src/sysc/kernel/sc_wait.cpp",
++        "systemc-2.3.3/src/sysc/kernel/sc_wait_cthread.cpp",
++        "systemc-2.3.3/src/sysc/tracing/sc_trace.cpp",
++        "systemc-2.3.3/src/sysc/tracing/sc_trace_file_base.cpp",
++        "systemc-2.3.3/src/sysc/tracing/sc_vcd_trace.cpp",
++        "systemc-2.3.3/src/sysc/tracing/sc_wif_trace.cpp",
++        "systemc-2.3.3/src/sysc/utils/sc_hash.cpp",
++        "systemc-2.3.3/src/sysc/utils/sc_list.cpp",
++        "systemc-2.3.3/src/sysc/utils/sc_mempool.cpp",
++        "systemc-2.3.3/src/sysc/utils/sc_pq.cpp",
++        "systemc-2.3.3/src/sysc/utils/sc_report.cpp",
++        "systemc-2.3.3/src/sysc/utils/sc_report_handler.cpp",
++        "systemc-2.3.3/src/sysc/utils/sc_stop_here.cpp",
++        "systemc-2.3.3/src/sysc/utils/sc_string.cpp",
++        "systemc-2.3.3/src/sysc/utils/sc_utils_ids.cpp",
++        "systemc-2.3.3/src/sysc/utils/sc_vector.cpp",
++        "systemc-2.3.3/src/tlm_core/tlm_2/tlm_generic_payload/tlm_gp.cpp",
++        "systemc-2.3.3/src/tlm_core/tlm_2/tlm_generic_payload/tlm_phase.cpp",
++        "systemc-2.3.3/src/tlm_core/tlm_2/tlm_quantum/tlm_global_quantum.cpp",
++        "systemc-2.3.3/src/tlm_utils/convenience_socket_bases.cpp",
++        "systemc-2.3.3/src/tlm_utils/instance_specific_extensions.cpp",
++        "systemc-2.3.3/src/sysc/packages/qt/qt.c",
++    ] + select({
++        "@platforms//cpu:x86_64": ["systemc-2.3.3/src/sysc/packages/qt/md/iX86_64.s"],
++        "@platforms//cpu:aarch64": ["systemc-2.3.3/src/sysc/packages/qt/md/aarch64.s"],
++        "//conditions:default": [],
++    }),
++    hdrs = glob([
++        "systemc-2.3.3/src/**/*.h",
++        "systemc-2.3.3/src/**/*.hpp",
++        "systemc-2.3.3/src/**/*.inc",
++        "systemc-2.3.3/src/systemc",
++        "systemc-2.3.3/src/tlm",
++    ]),
++    copts = ["-std=c++17", "-w"],
++    includes = ["systemc-2.3.3/src"],
++    linkopts = ["-lpthread"],
++    local_defines = [
++        "SC_BUILD",
++        "SC_INCLUDE_FX",
++        "SC_ENABLE_ASSERTIONS",
++        "SC_ENABLE_EARLY_MAXTIME_CREATION",
++        "SC_ENABLE_SIMULATION_PHASE_CALLBACKS_TRACING",
++    ],
++)

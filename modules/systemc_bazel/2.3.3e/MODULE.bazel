@@ -1,0 +1,9 @@
+module(
+    name = "systemc_bazel",
+    version = "2.3.3e",
+    compatibility_level = 1,
+    repo_name = "systemc_bazel",
+)
+bazel_dep(name = "rules_cc", version = "0.0.1")
+bazel_dep(name = "platforms", version = "0.0.4")
+
