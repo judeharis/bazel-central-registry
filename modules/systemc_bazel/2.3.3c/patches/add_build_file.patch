@@ -1,6 +1,6 @@
 --- /dev/null
 +++ BUILD.bazel
-@@ -0,0 +1,71 @@
+@@ -0,0 +1,73 @@
 +# Copyright Glasgow University
 +# All Rights Reserved.
 +#
@@ -35,6 +35,7 @@
 +
 +licenses(["notice"])
 +package(default_visibility = ["//visibility:public"])
++exports_files(["clang_wrapper.sh", "clangxx_wrapper.sh"])
 +load("@rules_foreign_cc//foreign_cc:defs.bzl", "cmake")
 +
 +
@@ -47,6 +48,7 @@
 +cmake(
 +    name = "systemc_lib",
 +    lib_source =  ":all",
++    data = ["clang_wrapper.sh", "clangxx_wrapper.sh"],
 +    build_args = ["-v -j 12"],
 +    cache_entries = {
 +        "CMAKE_CXX_STANDARD": "17",
@@ -55,8 +57,8 @@
 +    },
 +    env = {
 +        "CXXFLAGS": "-fPIC",
-+        "CXX": "clang++",
-+        "CC": "clang",
++        "CXX": "$$EXT_BUILD_ROOT$$/$(execpath clangxx_wrapper.sh)",
++        "CC": "$$EXT_BUILD_ROOT$$/$(execpath clang_wrapper.sh)",
 +    },
 +    includes = ["systemc-2.3.3/install/include"],
 +    install = True,
@@ -72,3 +74,33 @@
 +    visibility = ["//visibility:public"],
 +)
 +
+diff --git a/clang_wrapper.sh b/clang_wrapper.sh
+new file mode 100755
+--- /dev/null
++++ clang_wrapper.sh
+@@ -0,0 +1,10 @@
++#!/bin/bash
++# Drops GCC-only flags injected by the Bazel gcc toolchain that clang rejects.
++args=()
++for a in "$@"; do
++  case "$a" in
++    -fno-canonical-system-headers|-pass-exit-codes) ;;
++    *) args+=("$a") ;;
++  esac
++done
++exec clang "${args[@]}"
+diff --git a/clangxx_wrapper.sh b/clangxx_wrapper.sh
+new file mode 100755
+--- /dev/null
++++ clangxx_wrapper.sh
+@@ -0,0 +1,10 @@
++#!/bin/bash
++# Drops GCC-only flags injected by the Bazel gcc toolchain that clang rejects.
++args=()
++for a in "$@"; do
++  case "$a" in
++    -fno-canonical-system-headers|-pass-exit-codes) ;;
++    *) args+=("$a") ;;
++  esac
++done
++exec clang++ "${args[@]}"
